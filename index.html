@@ -501,7 +501,7 @@
   <div class="cart" id="cart">
     <h4>Your Cart</h4>
     <ul id="cart-items"></ul>
-    <p>Total: $<span id="total">0.00</span></p>
+    <p>Total: ₹<span id="total">0.00</span></p>
     <button onclick="checkout()">Pay Now</button>
   </div>
 
@@ -520,7 +520,7 @@
 
       cart.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+        li.textContent = `₹{item.name} - $₹{item.price.toFixed(2)}`;
         cartItems.appendChild(li);
         sum += item.price;
       });
