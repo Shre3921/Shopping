@@ -2,16 +2,206 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plant Store</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simply Natural - Plant Store</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: none; /* Remove previous bg color */
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Background image container */
+    .bg-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px);
+      z-index: -2;
+    }
+
+    /* Semi-transparent dark overlay */
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.2);
+      z-index: -1;
+    }
+
+    header, section, .cart, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #c8e6c9;
+    }
+    .hero {
+      background-color: #dcedc8;
+      text-align: center;
+      padding: 3rem 1rem;
+      border-radius: 12px;
+      max-width: 800px;
+      margin: 1.5rem auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      background-color: #388e3c;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    .btn:hover {
+      background-color: #2e7d32;
+    }
+    .products {
+      padding: 2rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+    .product-grid.scroll {
+      overflow-x: auto;
+      white-space: nowrap;
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: 1rem;
+    }
+    .product-grid.scroll .product {
+      flex: 0 0 auto;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 220px;
+      margin-right: 1rem;
+      display: inline-block;
+      vertical-align: top;
+      transition: transform 0.2s;
+    }
+    .product-grid.scroll .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    .product h4 {
+      margin: 0.5rem 0 0.2rem;
+    }
+    .add-btn {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .add-btn:hover {
+      background-color: #388e3c;
+    }
+    .cart {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 250px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .cart h4 {
+      margin: 0 0 0.5rem;
+    }
+    .cart ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+    .cart ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .cart button {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .cart button:hover {
+      background: #1b5e20;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e0f2f1;
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
+  <!-- Background and overlay -->
+  <div class="bg-image"></div>
+  <div class="bg-overlay"></div>
+
   <header>
     <h1>Simply Natural</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Home</a></li>
         <li><a href="#">Shop</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
@@ -26,23 +216,150 @@
   </section>
 
   <section class="products">
-    <h3>Featured Products</h3>
-    <div class="product-grid">
+
+    <h3>Indoor Plants</h3>
+    <div class="product-grid scroll">
       <div class="product">
-        <img src="https://via.placeholder.com/200" alt="Plant 1" />
-        <h4>Succulent Plant</h4>
-        <p>$12.99</p>
+        <img src="https://via.placeholder.com/200" alt="Aloe Vera" />
+        <h4>Aloe Vera</h4>
+        <p>$9.99</p>
+        <button class="add-btn" data-name="Aloe Vera" data-price="9.99">Add to Cart</button>
       </div>
       <div class="product">
-        <img src="https://via.placeholder.com/200" alt="Plant 2" />
-        <h4>Cactus Mini</h4>
-        <p>$10.50</p>
+        <img src="https://via.placeholder.com/200" alt="Snake Plant" />
+        <h4>Snake Plant</h4>
+        <p>$12.49</p>
+        <button class="add-btn" data-name="Snake Plant" data-price="12.49">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="ZZ Plant" />
+        <h4>ZZ Plant</h4>
+        <p>$14.99</p>
+        <button class="add-btn" data-name="ZZ Plant" data-price="14.99">Add to Cart</button>
       </div>
     </div>
+
+    <h3>Outdoor Plants</h3>
+    <div class="product-grid scroll">
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Rose" />
+        <h4>Rose</h4>
+        <p>$13.50</p>
+        <button class="add-btn" data-name="Rose" data-price="13.50">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Hibiscus" />
+        <h4>Hibiscus</h4>
+        <p>$11.75</p>
+        <button class="add-btn" data-name="Hibiscus" data-price="11.75">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Lemon Tree" />
+        <h4>Lemon Tree</h4>
+        <p>$17.20</p>
+        <button class="add-btn" data-name="Lemon Tree" data-price="17.20">Add to Cart</button>
+      </div>
+    </div>
+
+    <h3>Air-Purifying Plants</h3>
+    <div class="product-grid scroll">
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Peace Lily" />
+        <h4>Peace Lily</h4>
+        <p>$10.00</p>
+        <button class="add-btn" data-name="Peace Lily" data-price="10.00">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Spider Plant" />
+        <h4>Spider Plant</h4>
+        <p>$8.99</p>
+        <button class="add-btn" data-name="Spider Plant" data-price="8.99">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Rubber Plant" />
+        <h4>Rubber Plant</h4>
+        <p>$13.99</p>
+        <button class="add-btn" data-name="Rubber Plant" data-price="13.99">Add to Cart</button>
+      </div>
+    </div>
+
+    <h3>Succulents</h3>
+    <div class="product-grid scroll">
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Mini Cactus" />
+        <h4>Mini Cactus</h4>
+        <p>$7.50</p>
+        <button class="add-btn" data-name="Mini Cactus" data-price="7.50">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Zebra Plant" />
+        <h4>Zebra Plant</h4>
+        <p>$9.20</p>
+        <button class="add-btn" data-name="Zebra Plant" data-price="9.20">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Echeveria" />
+        <h4>Echeveria</h4>
+        <p>$6.80</p>
+        <button class="add-btn" data-name="Echeveria" data-price="6.80">Add to Cart</button>
+      </div>
+    </div>
+
   </section>
+
+  <div class="cart" id="cart">
+    <h4>Your Cart</h4>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="total">0.00</span></p>
+    <button onclick="checkout()">Pay Now</button>
+  </div>
 
   <footer>
     <p>&copy; 2025 Simply Natural. All rights reserved.</p>
   </footer>
+
+  <script>
+    const cart = [];
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const total = document.getElementById('total');
+      cartItems.innerHTML = '';
+      let sum = 0;
+
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+        cartItems.appendChild(li);
+        sum += item.price;
+      });
+
+      total.textContent = sum.toFixed(2);
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      alert("Payment successful! Thank you for your purchase.");
+      cart.length = 0; // Clear cart
+      updateCart();
+    }
+
+    // Attach event listeners after DOM content is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.add-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-name');
+          const price = parseFloat(btn.getAttribute('data-price'));
+          cart.push({ name, price });
+          updateCart();
+       
+        });
+      });
+    });
+  </script>
 </body>
-</html>
+</html> add dark and light mode
