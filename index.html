@@ -380,18 +380,17 @@
       });
     });
 
-    document.getElementById('checkout-btn').addEventListener('click', () => {
-      if (Object.keys(cart).length === 0) {
-        alert('Your cart is empty!');
-      } else {
-        let receipt = 'Order summary:\n';
-        for (const [name, item] of Object.entries(cart)) {
-          receipt += `${name} x ${item.quantity} - ₹${item.price * item.quantity}\n`;
-        }
-        receipt += `Total: ₹${totalAmountElem.textContent}`;
-        alert(receipt);
-      }
-    });
+   document.getElementById('checkout-btn').addEventListener('click', () => {
+  if (Object.keys(cart).length === 0) {
+    alert('Your cart is empty!');
+  } else {
+    // Save cart data in sessionStorage to access on checkout page
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    sessionStorage.setItem('totalAmount', totalAmountElem.textContent);
+    window.location.href = 'checkout.html';
+  }
+});
+
   </script>
 </body>
 </html>
